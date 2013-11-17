@@ -10,26 +10,26 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES rosfiducials2
-#  CATKIN_DEPENDS roscpp visualization_msgs
-#  DEPENDS system_lib
+  INCLUDE_DIRS include
+  LIBRARIES fiducials_rviz
+  CATKIN_DEPENDS roscpp visualization_msgs
+  DEPENDS system_lib
 )
 
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
-# add_library(rosfiducials2
-#   src/${PROJECT_NAME}/rosfiducials2.cpp
-# )
+add_library(fiducials_rviz
+  src/fiducials_rviz.cpp
+)
 
 ## Declare a cpp executable
-# add_executable(rosfiducials2_node src/rosfiducials2_node.cpp)
 
-add_executable(BasicShapes BasicShapes.cpp)
-target_link_libraries(BasicShapes ${catkin_LIBRARIES})
+add_executable(test2 test.c)
+target_link_libraries(test2 fiducials_rviz ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -55,11 +55,11 @@ target_link_libraries(BasicShapes ${catkin_LIBRARIES})
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS rosfiducials2 rosfiducials2_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+ install(TARGETS test2
+   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -69,11 +69,12 @@ target_link_libraries(BasicShapes ${catkin_LIBRARIES})
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
+install(FILES
+  package.xml
 #   # myfile1
 #   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 #############
 ## Testing ##
