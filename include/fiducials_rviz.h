@@ -5,7 +5,7 @@ extern "C" {
 
 void* initRviz(int argc, char **argv, char *nodeName);
 
-void sendMarker(void* rd, char *frame, double x, double y, double z);
+void sendMarker(void* rd, char *frame, int id, double x, double y, double z);
 
 #ifdef __cplusplus
 }
