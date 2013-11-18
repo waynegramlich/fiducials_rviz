@@ -1,25 +1,35 @@
 
 #include <ros/ros.h>
-
-#include "fiducials_rviz.h"
 #include <visualization_msgs/Marker.h>
+#include "fiducials_rviz.h"
 
 typedef struct rvizData {
-  ros::Publisher publisher;
+  ros::NodeHandle *nh;
+  ros::Publisher *publisher;
 } rvizData_struct;
 
 #define NAMESPACE "fiducials"
 #define SHAPE visualization_msgs::Marker::CUBE
+#define TOPIC "visualization_marker"
 
 void* initRviz(int argc, char **argv, char *nodeName)
 {
   rvizData_struct *rd = (rvizData_struct*)malloc(sizeof(rvizData_struct));
 
   ros::init(argc, argv, nodeName);
-  ros::NodeHandle nh;
-  rd->publisher = nh.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+
+  rd->nh = new ros::NodeHandle();
+  static ros::Publisher publisher =
+    rd->nh->advertise<visualization_msgs::Marker>(TOPIC, 1);
+  rd->publisher = &publisher; 
+
+  return rd;
 }
 
+int isOK()
+{
+  return ros::ok();
+}
 
 void sendMarker(void* rd, char *frame, int id, double x, double y, double z)
 {
@@ -61,6 +71,6 @@ void sendMarker(void* rd, char *frame, int id, double x, double y, double z)
     marker.lifetime = ros::Duration();
 
     // Publish the marker
-    rds->publisher.publish(marker);
+    rds->publisher->publish(marker);
 }
 
