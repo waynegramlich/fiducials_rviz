@@ -31,7 +31,8 @@ int isOK()
   return ros::ok();
 }
 
-void sendMarker(void* rd, char *frame, int id, double x, double y, double z)
+void sendMarker(void* rd, char *frame, int id, double x, double y, double z,
+  double twist, double dx, double dy, double dz)
 {
     rvizData_struct* rds = (rvizData_struct*)rd;
     visualization_msgs::Marker marker;
@@ -58,9 +59,9 @@ void sendMarker(void* rd, char *frame, int id, double x, double y, double z)
     marker.pose.orientation.w = 1.0;
 
     // Set the scale of the marker -- 1x1x1 here means 1m on a side
-    marker.scale.x = 1.0;
-    marker.scale.y = 1.0;
-    marker.scale.z = 1.0;
+    marker.scale.x = dx;
+    marker.scale.y = dy;
+    marker.scale.z = dz;
 
     // Set the color -- be sure to set alpha to something non-zero!
     marker.color.r = 0.0f;

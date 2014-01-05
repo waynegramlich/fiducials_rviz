@@ -3,11 +3,13 @@
 extern "C" {
 #endif
 
-void* initRviz(int argc, char **argv, char *nodeName);
+extern void *initRviz(int argc, char **argv, char *nodeName);
 
-void sendMarker(void* rd, char *frame, int id, double x, double y, double z);
+extern void sendMarker(void* rd, char *frame, int id,
+  double x, double y, double z,
+  double twist, double dx, double dy, double dz);
 
-int isOK();
+extern int isOK();
 
 #ifdef __cplusplus
 }
