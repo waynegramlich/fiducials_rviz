@@ -31,8 +31,8 @@ int isOK()
   return ros::ok();
 }
 
-void sendMarker(void* rd, char *frame, int id, double x, double y, double z,
-  double twist, double dx, double dy, double dz)
+void sendMarker(void* rd, const char *frame, int id, double x, double y,
+    double z, double twist, double dx, double dy, double dz)
 {
     rvizData_struct* rds = (rvizData_struct*)rd;
     visualization_msgs::Marker marker;
@@ -75,8 +75,8 @@ void sendMarker(void* rd, char *frame, int id, double x, double y, double z,
     rds->publisher->publish(marker);
 }
 
-void sendArrow(void* rd, char *frame, int id, double x, double y, double z,
-  double twist, double dx, double dy, double dz, double bearing)
+void sendArrow(void* rd, const char *frame, int id, double x, double y,
+    double z, double twist, double dx, double dy, double dz, double bearing)
 {
     rvizData_struct* rds = (rvizData_struct*)rd;
     visualization_msgs::Marker marker;

@@ -5,12 +5,12 @@ extern "C" {
 
 extern void *initRviz(int argc, char **argv, char *nodeName);
 
-extern void sendMarker(void* rd, char *frame, int id,
+extern void sendMarker(void* rd, const char *frame, int id,
   double x, double y, double z,
   double twist, double dx, double dy, double dz);
 
-void sendArrow(void* rd, char *frame, int id, double x, double y, double z,
-  double twist, double dx, double dy, double dz, double bearing);
+void sendArrow(void* rd, const char *frame, int id, double x, double y,
+    double z, double twist, double dx, double dy, double dz, double bearing);
 
 extern int isOK();
 
