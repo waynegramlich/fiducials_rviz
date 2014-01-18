@@ -6,6 +6,7 @@ project(fiducials_rviz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  tf
   visualization_msgs
 )
 
