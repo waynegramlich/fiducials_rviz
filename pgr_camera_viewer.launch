@@ -1,0 +1,28 @@
+<launch>
+  <!-- Variable names -->
+  <arg name="respawn" default="false" />
+  <arg name="camera_node" default="pgr_camera_node" />
+  <arg name="calibration_file" default="" />
+  <arg name="serial_number" default="0" />
+	
+  <node name="$(arg camera_node)" pkg="pgr_camera_driver" type="pgr_camera_node" respawn="$(arg respawn)" output="screen">
+        <param name="width" type="int" value="640" /> # Default 640
+        <param name="height" type="int" value="480" /> # Default 480
+        <param name="format" value="Y8" />
+        <param name="frame_rate" type="int" value="15" />
+        <param name="camera_name" type="str" value="pgr_camera" />
+        
+        # NECESSARY:  
+        <param name="intrinsics_ini" type="str" value="$(arg calibration_file)" />
+        
+        # CUSTOMIZE the value as needed to use a specific camera based on its serial number
+        <param name="serial_number" type="int" value="$(arg serial_number)" />
+  </node> 	
+	
+  <node name="image_view_usb" pkg="image_view" type="image_view" respawn="true" 
+output="screen">
+    <remap from="/image" to="$(arg camera_node)/image_raw"/>
+    <param name="autosize" value="true" />
+  </node>
+
+</launch>
